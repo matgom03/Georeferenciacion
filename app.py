@@ -129,7 +129,7 @@ def update_map(colorPalette, show_labels, mapClass):
         casos_totales=("numerocasos", "sum"),
         poblacion_total=("poblacion", "sum")
     ).reset_index()
-    resumen["tasa_x_mil"] = resumen["casostotales"] / resumen["poblaciontotal"] * 1000
+    resumen["tasa_x_mil"] = resumen["casos_totales"] / resumen["poblacion_total"] * 1000
 
     antioquia_data = antioquia.merge(
         resumen, left_on="mpio_cdpmp", right_on="codigomunicipio", how="left"
