@@ -33,14 +33,14 @@ if "codigomunicipio" in df.columns:
 
 if "mpio_cdpmp" in antioquia.columns:
     antioquia["mpio_cdpmp"] = antioquia["mpio_cdpmp"].astype(str).str.zfill(5)
-if "tasaxmil" in df.columns:
+if "tasaxmilhabitantes" in df.columns:
     # Si hay tasa y población pero faltan casos
     if "poblacion" in df.columns and "numerocasos" not in df.columns:
-        df["numerocasos"] = (df["tasaxmil"] * df["poblacion"]) / 1000
+        df["numerocasos"] = (df["tasaxmilhabitantes"] * df["poblacion"]) / 1000
 
     # Si hay tasa y casos pero falta población
     if "numerocasos" in df.columns and "poblacion" not in df.columns:
-        df["poblacion"] = (df["numerocasos"] * 1000) / df["tasaxmil"]
+        df["poblacion"] = (df["numerocasos"] * 1000) / df["tasaxmilhabitantes"]
 
 # =========================
 # Configuración de Dash
