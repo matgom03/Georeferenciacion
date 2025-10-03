@@ -113,6 +113,26 @@ app.layout = html.Div([
         """)
     ]), dcc.Tab(label= "Análisis Estadístico", children=[
             html.H2("Análisis Estadístico de Mortalidad"),
+            html.Div([
+                html.Div([
+                    html.H3("Tasa promedio (x mil)", style={"textAlign": "center"}),
+                    html.H4(f"{resumen['tasa_x_mil'].mean():.2f}", style={"textAlign": "center", "color": "blue"})
+                ], style={"width": "30%", "display": "inline-block", "background": "#f2f2f2",
+                          "margin": "10px", "padding": "15px", "borderRadius": "10px", "boxShadow": "2px 2px 5px gray"}),
+
+                html.Div([
+                    html.H3("Total casos", style={"textAlign": "center"}),
+                    html.H4(f"{resumen['casos_totales'].sum():,.0f}", style={"textAlign": "center", "color": "green"})
+                ], style={"width": "30%", "display": "inline-block", "background": "#f2f2f2",
+                          "margin": "10px", "padding": "15px", "borderRadius": "10px", "boxShadow": "2px 2px 5px gray"}),
+
+                html.Div([
+                    html.H3("Máxima tasa acumulada", style={"textAlign": "center"}),
+                    html.H4(f"{top10.iloc[0]['nombremunicipio']} ({top10.iloc[0]['tasa_x_mil']:.2f})",
+                            style={"textAlign": "center", "color": "red"})
+                ], style={"width": "30%", "display": "inline-block", "background": "#f2f2f2",
+                          "margin": "10px", "padding": "15px", "borderRadius": "10px", "boxShadow": "2px 2px 5px gray"})
+            ], style={"display": "flex", "justifyContent": "center"}),
             html.H3("Boxplot de la tasa por mil habitantes"),
             dcc.Graph(
                 figure=px.box(df, y="tasaxmilhabitantes",
